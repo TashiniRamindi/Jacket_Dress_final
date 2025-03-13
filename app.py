@@ -98,9 +98,6 @@ def preprocess_input_jacket(user_input):
     input_df = input_df.reindex(columns=columns_jacket, fill_value=0)
     
     return input_df
-
-    
-  
 # Streamlit app interface
 st.title("Cloth Season Prediction App")
 st.write("Please specify whether the cloth is a Jacket or a Dress to predict the season.")
