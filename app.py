@@ -132,14 +132,14 @@ if cloth_type == 'Dress':
     
 elif cloth_type == 'Jacket':
 # Define the outerwear type selection
-outerwear_type = st.selectbox('What type of outerwear is this?', ['jacket', 'vest', 'coat'])
+Outerwear_type = st.selectbox('What type of outerwear is this?', ['jacket', 'vest', 'coat'])
 
 # Define style options based on outerwear type
-if outerwear_type == 'jacket':
+if Outerwear_type == 'jacket':
     style_options = ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'harrington', 'rain_jacket', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style']
-elif outerwear_type == 'vest':
+elif Outerwear_type == 'vest':
     style_options = ['gilet', 'puffer', 'trucker', 'suit', 'other_style']
-elif outerwear_type == 'coat':
+elif Outerwear_type == 'coat':
     style_options = ['puffer', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn', 'other_style']
 else:
     style_options = ['other_style']
