@@ -70,8 +70,9 @@ def preprocess_input_dress(user_input):
     return input_df
 
 # Function to preprocess inputs for jacket data
+# Function to preprocess the input for the jacket
 def preprocess_input_jacket(user_input):
-    # One-Hot Encoding for categorical columns for jacket
+    # One-Hot Encoding for categorical columns
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
@@ -79,7 +80,7 @@ def preprocess_input_jacket(user_input):
     input_df = pd.concat([input_df, input_dummies], axis=1)
     input_df = input_df.drop(columns=dummy_cols)
     
-    # Ordinal Encoding for specific columns for jacket
+    # Ordinal Encoding for specific columns
     fit_mapping = {'regular_fit': 0, 'relaxed_fit': 1, 'slim_fit': 2, 'oversize_fit': 3}
     length_mapping = {'short': 0, 'medium': 1, 'long': 2}
     sleeve_length_mapping = {'sleeveless': 0, 'elbow_length': 1, 'long_sleeve': 2}
@@ -92,6 +93,9 @@ def preprocess_input_jacket(user_input):
     input_df['Breathable'] = 1 if user_input['Breathable'] == 'Yes' else 0
     input_df['Lightweight'] = 1 if user_input['Lightweight'] == 'Yes' else 0
     input_df['Water_Repellent'] = 1 if user_input['Water_Repellent'] == 'Yes' else 0
+    
+    # Assuming you have a predefined list of columns from the trained model
+    columns_jacket = ['Fit', 'Length', 'Sleeve Length', 'Breathable', 'Lightweight', 'Water_Repellent']  # Add your model's columns here
     
     # Reindex to match the columns the model was trained on
     input_df = input_df.reindex(columns=columns_jacket, fill_value=0)
@@ -127,7 +131,7 @@ if cloth_type == 'Dress':
 
     
 elif cloth_type == 'Jacket':
-   # Define the outerwear type selection
+# Define the outerwear type selection
 outerwear_type = st.selectbox('What type of outerwear is this?', ['jacket', 'vest', 'coat'])
 
 # Define style options based on outerwear type
@@ -143,7 +147,7 @@ else:
 # Select style based on outerwear type
 selected_style = st.selectbox('What style is the outerwear?', style_options)
 
-# Remaining user input
+# Collect remaining user input
 user_input = {
     'Outerwear Type': outerwear_type,
     'Style': selected_style,
@@ -159,13 +163,14 @@ user_input = {
     'Breathable': st.radio('Is the outerwear breathable?', ('Yes', 'No')),
     'Lightweight': st.radio('Is the outerwear lightweight?', ('Yes', 'No')),
     'Water_Repellent': st.radio('Is the outerwear water repellent?', ('Yes', 'No'))
+}
 
-        # Radio buttons for additional features
-        'Breathable': st.radio('Is the jacket breathable?', ('Yes', 'No'), index=None),
-        'Lightweight': st.radio('Is the jacket lightweight?', ('Yes', 'No'), index=None),
-        'Water_Repellent': st.radio('Is the jacket water repellent?', ('Yes', 'No'), index=None)
-    }
-    
+# Display user input
+st.write("User Input:")
+st.write(user_input)
+
+# Preprocess input
+processed_input = preprocess_input_jacket(user_input)
 
 # Mapping for seasons
 season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
