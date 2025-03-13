@@ -154,7 +154,8 @@ elif cloth_type == 'Jacket':
         'Lightweight': st.radio('Is the jacket lightweight?', ('Yes', 'No'), index=None),
         'Water_Repellent': st.radio('Is the jacket water repellent?', ('Yes', 'No'), index=None)
     }
-  
+  # Call the preprocessing function
+    preprocessed_input = preprocess_input_jacket(user_input)
 
 # Mapping for seasons
 season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
