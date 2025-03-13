@@ -42,12 +42,7 @@ columns_jacket = joblib.load("jacket_X_train.pkl")
 
 # Function to preprocess inputs for dress data
 def preprocess_input_dress(user_input):
-    # Assign relevant styles based on outerwear type
-    df['Style'] = np.where(df['Outerwear_Type'] == 'jacket', df['Jacket Style'],
-                        np.where(df['Outerwear_Type'] == 'coat', df['Coat Style'],
-                        df['Vest Style']))
-
-    # One-Hot Encoding for categorical columns for dress
+   # One-Hot Encoding for categorical columns for dress
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
@@ -75,6 +70,7 @@ def preprocess_input_dress(user_input):
     return input_df
 
 # Function to preprocess inputs for jacket data
+
 def preprocess_input_jacket(user_input):
     # One-Hot Encoding for categorical columns for jacket
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
@@ -142,7 +138,14 @@ elif cloth_type == 'Jacket':
         'Collar': st.selectbox('What type of collar does the jacket have?', ['point', 'no collar', 'band', 'notch', 'lapel','other_collar'], index=None),
         'Neckline': st.selectbox('What type of neckline does the jacket have?', ['collared_neck', 'hooded', 'funnel_neck', 'v_neck', 'other_neck'], index=None),
         'Hemline': st.selectbox('What type of hemline does the jacket have?', ['ribbed_hem', 'straight_hem', 'other_hem'], index=None),
-        'Style': st.selectbox('What style is the jacket?', ['bomber', 'gilet', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'other_style', 'harrington', 'rain_jacket', 'parka', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 'overcoat', 'peacoat', 'hardshell', 'barn','other_style'], index=None),
+        # Dynamic Style selection based on 'Outerwear Type'
+        'Style': st.selectbox('What style is the outerwear?', 
+                              ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'other_style', 
+                               'harrington', 'rain_jacket', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 
+                               'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style'] if user_input['Outerwear Type'] == 'jacket'
+                              else ['puffer', 'other_style', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn'] if user_input['Outerwear Type'] == 'coat'
+                              else ['gilet', 'puffer', 'trucker', 'other_style', 'suit'], index=None),
+      
         'Sleeve Style': st.selectbox('What sleeve style does the jacket have?', ['cuff_sleeve', 'no_sleeve', 'plain_sleeve', 'raglan_sleeve','other_sleeve_style'], index=None),
         'Pattern': st.selectbox('What pattern does the jacket have?', ['solid_or_plain', 'multicolor', 'printed','plaid', 'cable_knit', 'tie_dry', 'houndstooth', 'chevron','other'], index=None),
         'Product Colour': st.selectbox('What color is the jacket?', ['black', 'grey', 'blue', 'red', 'white', 'brown', 'yellow', 'pink', 'green', 'cream', 'beige', 'purple', 'orange', 'multi_color'], index=None),
