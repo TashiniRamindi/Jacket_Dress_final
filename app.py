@@ -70,7 +70,6 @@ def preprocess_input_dress(user_input):
     return input_df
 
 # Function to preprocess inputs for jacket data
-
 def preprocess_input_jacket(user_input):
     # One-Hot Encoding for categorical columns for jacket
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
@@ -98,6 +97,7 @@ def preprocess_input_jacket(user_input):
     input_df = input_df.reindex(columns=columns_jacket, fill_value=0)
     
     return input_df
+
 # Streamlit app interface
 st.title("Cloth Season Prediction App")
 st.write("Please specify whether the cloth is a Jacket or a Dress to predict the season.")
@@ -136,26 +136,27 @@ elif cloth_type == 'Jacket':
         'Neckline': st.selectbox('What type of neckline does the jacket have?', ['collared_neck', 'hooded', 'funnel_neck', 'v_neck', 'other_neck'], index=None),
         'Hemline': st.selectbox('What type of hemline does the jacket have?', ['ribbed_hem', 'straight_hem', 'other_hem'], index=None),
         
-        # Dynamic Style selection based on 'Outerwear Type'
-        'Style': st.selectbox('What style is the outerwear?', 
-                              ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'other_style', 
-                               'harrington', 'rain_jacket', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 
-                               'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style'] if user_input['Outerwear Type'] == 'jacket'
-                              else ['puffer', 'other_style', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn'] if user_input['Outerwear Type'] == 'coat'
-                              else ['gilet', 'puffer', 'trucker', 'other_style', 'suit'], index=None),
+        # Additional options based on Outerwear Type
+        'Style': st.selectbox(
+            'What style is the outerwear?', 
+            ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'other_style', 
+             'harrington', 'rain_jacket', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 
+             'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style'] if st.session_state.get('Outerwear Type') == 'jacket'
+            else ['puffer', 'other_style', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn'] if st.session_state.get('Outerwear Type') == 'coat'
+            else ['gilet', 'puffer', 'trucker', 'other_style', 'suit']
+        ),
         
-        'Sleeve Style': st.selectbox('What sleeve style does the jacket have?', ['cuff_sleeve', 'no_sleeve', 'plain_sleeve', 'raglan_sleeve','other_sleeve_style'], index=None),
-        'Pattern': st.selectbox('What pattern does the jacket have?', ['solid_or_plain', 'multicolor', 'printed','plaid', 'cable_knit', 'tie_dry', 'houndstooth', 'chevron','other'], index=None),
+        'Sleeve Style': st.selectbox('What sleeve style does the jacket have?', ['cuff_sleeve', 'no_sleeve', 'plain_sleeve', 'raglan_sleeve', 'other_sleeve_style'], index=None),
+        'Pattern': st.selectbox('What pattern does the jacket have?', ['solid_or_plain', 'multicolor', 'printed', 'plaid', 'cable_knit', 'tie_dry', 'houndstooth', 'chevron', 'other'], index=None),
         'Product Colour': st.selectbox('What color is the jacket?', ['black', 'grey', 'blue', 'red', 'white', 'brown', 'yellow', 'pink', 'green', 'cream', 'beige', 'purple', 'orange', 'multi_color'], index=None),
-        'Material': st.selectbox('What material is the jacket made from?', ['Polyamide', 'Cotton', 'Polyester', 'Nylon',  'fleece', 'Wool', 'denim', 'leather', 'faux_fur', 'corduroy', 'rib_knit', 'Other material'], index=None),
+        'Material': st.selectbox('What material is the jacket made from?', ['Polyamide', 'Cotton', 'Polyester', 'Nylon', 'fleece', 'Wool', 'denim', 'leather', 'faux_fur', 'corduroy', 'rib_knit', 'Other material'], index=None),
 
         # Radio buttons for additional features
         'Breathable': st.radio('Is the jacket breathable?', ('Yes', 'No'), index=None),
         'Lightweight': st.radio('Is the jacket lightweight?', ('Yes', 'No'), index=None),
         'Water_Repellent': st.radio('Is the jacket water repellent?', ('Yes', 'No'), index=None)
     }
-  # Call the preprocessing function
-    preprocessed_input = preprocess_input_jacket(user_input)
+    
 
 # Mapping for seasons
 season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
