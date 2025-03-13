@@ -135,6 +135,7 @@ elif cloth_type == 'Jacket':
         'Collar': st.selectbox('What type of collar does the jacket have?', ['point', 'no collar', 'band', 'notch', 'lapel','other_collar'], index=None),
         'Neckline': st.selectbox('What type of neckline does the jacket have?', ['collared_neck', 'hooded', 'funnel_neck', 'v_neck', 'other_neck'], index=None),
         'Hemline': st.selectbox('What type of hemline does the jacket have?', ['ribbed_hem', 'straight_hem', 'other_hem'], index=None),
+        
         # Dynamic Style selection based on 'Outerwear Type'
         'Style': st.selectbox('What style is the outerwear?', 
                               ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'other_style', 
@@ -142,7 +143,7 @@ elif cloth_type == 'Jacket':
                                'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style'] if user_input['Outerwear Type'] == 'jacket'
                               else ['puffer', 'other_style', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn'] if user_input['Outerwear Type'] == 'coat'
                               else ['gilet', 'puffer', 'trucker', 'other_style', 'suit'], index=None),
-      
+        
         'Sleeve Style': st.selectbox('What sleeve style does the jacket have?', ['cuff_sleeve', 'no_sleeve', 'plain_sleeve', 'raglan_sleeve','other_sleeve_style'], index=None),
         'Pattern': st.selectbox('What pattern does the jacket have?', ['solid_or_plain', 'multicolor', 'printed','plaid', 'cable_knit', 'tie_dry', 'houndstooth', 'chevron','other'], index=None),
         'Product Colour': st.selectbox('What color is the jacket?', ['black', 'grey', 'blue', 'red', 'white', 'brown', 'yellow', 'pink', 'green', 'cream', 'beige', 'purple', 'orange', 'multi_color'], index=None),
