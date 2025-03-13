@@ -42,6 +42,11 @@ columns_jacket = joblib.load("jacket_X_train.pkl")
 
 # Function to preprocess inputs for dress data
 def preprocess_input_dress(user_input):
+    # Assign relevant styles based on outerwear type
+    df['Style'] = np.where(df['Outerwear_Type'] == 'jacket', df['Jacket Style'],
+                        np.where(df['Outerwear_Type'] == 'coat', df['Coat Style'],
+                        df['Vest Style']))
+
     # One-Hot Encoding for categorical columns for dress
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
