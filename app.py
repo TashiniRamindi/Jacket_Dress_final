@@ -127,29 +127,38 @@ if cloth_type == 'Dress':
 
     
 elif cloth_type == 'Jacket':
-    user_input = {
-        'Outerwear Type': st.selectbox('What type of outerwear is this?', ['jacket', 'vest', 'coat'], index=None),
-        'Fit': st.selectbox('What is the fit of the jacket?', ['regular_fit', 'relaxed_fit', 'slim_fit', 'oversize_fit'], index=None),
-        'Length': st.selectbox('What is the length of the jacket?', ['short', 'medium', 'long'], index=None),
-        'Sleeve Length': st.selectbox('What sleeve length does the jacket have?', ['long_sleeve', 'sleeveless', 'elbow_length'], index=None),
-        'Collar': st.selectbox('What type of collar does the jacket have?', ['point', 'no collar', 'band', 'notch', 'lapel','other_collar'], index=None),
-        'Neckline': st.selectbox('What type of neckline does the jacket have?', ['collared_neck', 'hooded', 'funnel_neck', 'v_neck', 'other_neck'], index=None),
-        'Hemline': st.selectbox('What type of hemline does the jacket have?', ['ribbed_hem', 'straight_hem', 'other_hem'], index=None),
-        
-        # Additional options based on Outerwear Type
-        'Style': st.selectbox(
-            'What style is the outerwear?', 
-            ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'other_style', 
-             'harrington', 'rain_jacket', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 
-             'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style'] if st.session_state.get('Outerwear Type') == 'jacket'
-            else ['puffer', 'other_style', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn'] if st.session_state.get('Outerwear Type') == 'coat'
-            else ['gilet', 'puffer', 'trucker', 'other_style', 'suit']
-        ),
-        
-        'Sleeve Style': st.selectbox('What sleeve style does the jacket have?', ['cuff_sleeve', 'no_sleeve', 'plain_sleeve', 'raglan_sleeve', 'other_sleeve_style'], index=None),
-        'Pattern': st.selectbox('What pattern does the jacket have?', ['solid_or_plain', 'multicolor', 'printed', 'plaid', 'cable_knit', 'tie_dry', 'houndstooth', 'chevron', 'other'], index=None),
-        'Product Colour': st.selectbox('What color is the jacket?', ['black', 'grey', 'blue', 'red', 'white', 'brown', 'yellow', 'pink', 'green', 'cream', 'beige', 'purple', 'orange', 'multi_color'], index=None),
-        'Material': st.selectbox('What material is the jacket made from?', ['Polyamide', 'Cotton', 'Polyester', 'Nylon', 'fleece', 'Wool', 'denim', 'leather', 'faux_fur', 'corduroy', 'rib_knit', 'Other material'], index=None),
+   # Define the outerwear type selection
+outerwear_type = st.selectbox('What type of outerwear is this?', ['jacket', 'vest', 'coat'])
+
+# Define style options based on outerwear type
+if outerwear_type == 'jacket':
+    style_options = ['bomber', 'trucker', 'windbreaker', 'soft_shell', 'sweatshirt', 'puffer', 'harrington', 'rain_jacket', 'cargo', 'shirt', 'trench', 'blazer', 'cocoon', 'anorak', 'overcoat', 'peacoat', 'hardshell', 'barn', 'other_style']
+elif outerwear_type == 'vest':
+    style_options = ['gilet', 'puffer', 'trucker', 'suit', 'other_style']
+elif outerwear_type == 'coat':
+    style_options = ['puffer', 'parka', 'trench', 'cocoon', 'overcoat', 'peacoat', 'barn', 'other_style']
+else:
+    style_options = ['other_style']
+
+# Select style based on outerwear type
+selected_style = st.selectbox('What style is the outerwear?', style_options)
+
+# Remaining user input
+user_input = {
+    'Outerwear Type': outerwear_type,
+    'Style': selected_style,
+    'Fit': st.selectbox('What is the fit of the outerwear?', ['regular_fit', 'relaxed_fit', 'slim_fit', 'oversize_fit']),
+    'Length': st.selectbox('What is the length of the outerwear?', ['short', 'medium', 'long']),
+    'Sleeve Length': st.selectbox('What sleeve length does the outerwear have?', ['long_sleeve', 'sleeveless', 'elbow_length']),
+    'Collar': st.selectbox('What type of collar does the outerwear have?', ['point', 'no collar', 'band', 'notch', 'lapel', 'other_collar']),
+    'Neckline': st.selectbox('What type of neckline does the outerwear have?', ['collared_neck', 'hooded', 'funnel_neck', 'v_neck', 'other_neck']),
+    'Hemline': st.selectbox('What type of hemline does the outerwear have?', ['ribbed_hem', 'straight_hem', 'other_hem']),
+    'Pattern': st.selectbox('What pattern does the outerwear have?', ['solid_or_plain', 'multicolor', 'printed', 'plaid', 'cable_knit', 'tie_dry', 'houndstooth', 'chevron', 'other']),
+    'Product Colour': st.selectbox('What color is the outerwear?', ['black', 'grey', 'blue', 'red', 'white', 'brown', 'yellow', 'pink', 'green', 'cream', 'beige', 'purple', 'orange', 'multi_color']),
+    'Material': st.selectbox('What material is the outerwear made from?', ['Polyamide', 'Cotton', 'Polyester', 'Nylon', 'fleece', 'Wool', 'denim', 'leather', 'faux_fur', 'corduroy', 'rib_knit', 'Other material']),
+    'Breathable': st.radio('Is the outerwear breathable?', ('Yes', 'No')),
+    'Lightweight': st.radio('Is the outerwear lightweight?', ('Yes', 'No')),
+    'Water_Repellent': st.radio('Is the outerwear water repellent?', ('Yes', 'No'))
 
         # Radio buttons for additional features
         'Breathable': st.radio('Is the jacket breathable?', ('Yes', 'No'), index=None),
