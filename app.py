@@ -41,11 +41,10 @@ columns_dress = joblib.load("dress_X_train.pkl")
 columns_jacket = joblib.load("jacket_X_train.pkl")
 
 def preprocess_input_dress(user_input):
-    if not user_input:
-        raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
-    
-    # Convert user_input to DataFrame
-    #input_df = pd.DataFrame([user_input], columns=user_input.keys())
+        # Check if the input is valid (all fields are filled)
+    if not all(user_input.values()):
+        st.error("Error: Please fill in all fields before making a prediction.")
+        return None
     
     # Debug: Output the input data
     st.write("User Input for Dress:", input_df)
@@ -78,11 +77,10 @@ def preprocess_input_dress(user_input):
 
 # Function to preprocess inputs for jacket data
 def preprocess_input_jacket(user_input):
-    if not user_input:
-        raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
-    
-    # Convert user_input to DataFrame
-    #input_df = pd.DataFrame([user_input], columns=user_input.keys())
+    # Check if the input is valid (all fields are filled)
+    if not all(user_input.values()):
+        st.error("Error: Please fill in all fields before making a prediction.")
+        return None
     
     # Debug: Output the input data
     st.write("User Input for Jacket:", input_df)
