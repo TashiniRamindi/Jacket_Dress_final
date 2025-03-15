@@ -45,7 +45,7 @@ def preprocess_input_dress(user_input):
         raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
     
     # Convert user_input to DataFrame
-    input_df = pd.DataFrame([user_input], columns=user_input.keys())
+    #input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
     # Debug: Output the input data
     st.write("User Input for Dress:", input_df)
@@ -82,7 +82,7 @@ def preprocess_input_jacket(user_input):
         raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
     
     # Convert user_input to DataFrame
-    input_df = pd.DataFrame([user_input], columns=user_input.keys())
+    #input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
     # Debug: Output the input data
     st.write("User Input for Jacket:", input_df)
