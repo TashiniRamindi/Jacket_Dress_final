@@ -45,9 +45,7 @@ def preprocess_input_dress(user_input):
     if not all(user_input.values()):
         st.error("Error: Please fill in all fields before making a prediction.")
         return None
-    
-    # Debug: Output the input data
-    st.write("User Input for Dress:", input_df)
+ 
     # One-Hot Encoding for categorical columns for dress
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
@@ -81,9 +79,7 @@ def preprocess_input_jacket(user_input):
     if not all(user_input.values()):
         st.error("Error: Please fill in all fields before making a prediction.")
         return None
-    
-    # Debug: Output the input data
-    st.write("User Input for Jacket:", input_df)
+
     
     # One-Hot Encoding for categorical columns for jacket
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
