@@ -40,11 +40,15 @@ model_jacket = joblib.load("classification_model_jacket.pkl")
 columns_dress = joblib.load("dress_X_train.pkl")
 columns_jacket = joblib.load("jacket_X_train.pkl")
 
-# Function to preprocess inputs for dress data
 def preprocess_input_dress(user_input):
-    # Check if the user input is empty
     if not user_input:
         raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
+    
+    # Convert user_input to DataFrame
+    input_df = pd.DataFrame([user_input], columns=user_input.keys())
+    
+    # Debug: Output the input data
+    st.write("User Input for Dress:", input_df)
     # One-Hot Encoding for categorical columns for dress
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
@@ -72,11 +76,15 @@ def preprocess_input_dress(user_input):
     
     return input_df
 
-# Function to preprocess inputs for jacket data
-def preprocess_input_jacket(user_input):
-    # Check if the user input is empty
+def preprocess_input_dress(user_input):
     if not user_input:
         raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
+    
+    # Convert user_input to DataFrame
+    input_df = pd.DataFrame([user_input], columns=user_input.keys())
+    
+    # Debug: Output the input data
+    st.write("User Input for Dress:", input_df)
     # One-Hot Encoding for categorical columns for jacket
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
