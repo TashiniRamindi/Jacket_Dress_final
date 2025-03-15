@@ -46,7 +46,7 @@ def preprocess_input_dress(user_input):
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
-    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=True)
+    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=False)
     input_df = pd.concat([input_df, input_dummies], axis=1)
     input_df = input_df.drop(columns=dummy_cols)
     
@@ -75,7 +75,7 @@ def preprocess_input_jacket(user_input):
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
-    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=True)
+    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=False)
     input_df = pd.concat([input_df, input_dummies], axis=1)
     input_df = input_df.drop(columns=dummy_cols)
     
