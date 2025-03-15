@@ -153,14 +153,6 @@ elif cloth_type == 'Jacket':
 # Define the mapping for predicted seasons
 season_mapping = {0: 'Spring', 1: 'Summer', 2: 'Fall', 3: 'Winter'}
 
-# Assuming the preprocessing functions and models are already defined:
-# preprocess_input_dress, preprocess_input_jacket, model_dress, model_jacket
-
-# Streamlit user input for cloth type
-cloth_type = st.selectbox("Select the type of cloth", ['Dress', 'Jacket'])
-
-# User input (you can customize this based on your actual input fields)
-user_input = st.text_input("Enter the clothing features")
 
 # When the user presses the 'Predict' button
 if st.button("Predict"):
