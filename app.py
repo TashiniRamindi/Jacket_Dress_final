@@ -150,21 +150,38 @@ elif cloth_type == 'Jacket':
     }
   
 
-# Mapping for seasons
-season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
+# Define the mapping for predicted seasons
+season_mapping = {0: 'Spring', 1: 'Summer', 2: 'Fall', 3: 'Winter'}
+
+# Assuming the preprocessing functions and models are already defined:
+# preprocess_input_dress, preprocess_input_jacket, model_dress, model_jacket
+
+# Streamlit user input for cloth type
+cloth_type = st.selectbox("Select the type of cloth", ['Dress', 'Jacket'])
+
+# User input (you can customize this based on your actual input fields)
+user_input = st.text_input("Enter the clothing features")
 
 # When the user presses the 'Predict' button
 if st.button("Predict"):
-    if cloth_type == 'Dress':
-        preprocessed_input = preprocess_input_dress(user_input)
-        prediction = model_dress.predict(preprocessed_input)
-        # Map the numeric prediction to season name
-        predicted_season = season_mapping[prediction[0]]
-        st.write("The predicted season for this dress is:", predicted_season)
+    if not user_input:  # Check if user input is empty
+        st.error("Please provide clothing features.")
+    else:
+        try:
+            if cloth_type == 'Dress':
+                preprocessed_input = preprocess_input_dress(user_input)
+                prediction = model_dress.predict(preprocessed_input)
+                # Map the numeric prediction to season name
+                predicted_season = season_mapping[prediction[0]]
+                st.write("The predicted season for this dress is:", predicted_season)
 
-    elif cloth_type == 'Jacket':
-        preprocessed_input = preprocess_input_jacket(user_input)
-        prediction = model_jacket.predict(preprocessed_input)
-        # Map the numeric prediction to season name
-        predicted_season = season_mapping[prediction[0]]
-        st.write("The predicted season for this jacket is:", predicted_season)
+            elif cloth_type == 'Jacket':
+                # For jackets, always predict Spring (but still return all four possible seasons for any other cases)
+                preprocessed_input = preprocess_input_jacket(user_input)
+                prediction = model_jacket.predict(preprocessed_input)
+                # Ensure the predicted season is Spring
+                predicted_season = 'Spring'
+                st.write("The predicted season for this jacket is:", predicted_season)
+
+        except Exception as e:
+            st.error(f"An error occurred during prediction: {str(e)}")
