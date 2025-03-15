@@ -76,7 +76,8 @@ def preprocess_input_dress(user_input):
     
     return input_df
 
-def preprocess_input_dress(user_input):
+# Function to preprocess inputs for jacket data
+def preprocess_input_jacket(user_input):
     if not user_input:
         raise ValueError("Error: No input provided. Please fill in the required fields before making a prediction.")
     
@@ -84,7 +85,8 @@ def preprocess_input_dress(user_input):
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
     # Debug: Output the input data
-    st.write("User Input for Dress:", input_df)
+    st.write("User Input for Jacket:", input_df)
+    
     # One-Hot Encoding for categorical columns for jacket
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
