@@ -46,14 +46,23 @@ def preprocess_input_dress(user_input):
         st.error("Error: Please fill in all fields before making a prediction.")
         return None
  
-    # One-Hot Encoding for categorical columns for dress
+   import pandas as pd
+
+def preprocess_input_jacket(user_input):
+    # Define the categorical columns
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
+    
+    # Convert user_input to DataFrame
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
-    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=True)
-    input_df = pd.concat([input_df, input_dummies], axis=1)
-    input_df = input_df.drop(columns=dummy_cols)
+    # Perform one-hot encoding without dropping the first category
+    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=False)
     
+    # Concatenate the original DataFrame with the one-hot encoded columns
+    input_df = pd.concat([input_df, input_dummies], axis=1)
+    
+    # Drop the original categorical columns
+    input_df = input_df.drop(columns=dummy_cols)
     # Ordinal Encoding for specific columns for dress
     fit_mapping = {'slim_fit': 0, 'regular_fit': 1, 'relaxed_fit': 3}
     length_mapping = {'mini': 0, 'knee': 1, 'midi': 2, 'maxi': 3}
