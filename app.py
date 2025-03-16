@@ -158,26 +158,34 @@ elif cloth_type == 'Jacket':
 # Mapping for seasons
 season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
 
+# List of required input fields for prediction
+required_fields = ['Style', 'Material', 'Collar', 'Neckline', 'Hemline', 'Sleeve Style', 'Pattern', 'Product Colour']
+
 # When the user presses the 'Predict' button
 if st.button("Predict"):
-    # Get user inputs for style and material
-    style = user_input.get('Style', '').lower()  # Convert to lowercase for consistency
-    material = user_input.get('Material', '').lower()
-
-    # Check if style is "puffer" and material is either "wool" or "leather"
-    if style == 'puffer' and material in ['wool', 'leather']:
-        st.write("The predicted season for this item is: winter (based on style and material).")
+    # Check if all required fields are filled
+    missing_fields = [field for field in required_fields if not user_input.get(field)]
+    if missing_fields:
+        st.write(f"Error: Please fill in all required fields: {', '.join(missing_fields)}")
     else:
-        if cloth_type == 'Dress':
-            preprocessed_input = preprocess_input_dress(user_input)
-            prediction = model_dress.predict(preprocessed_input)
-            # Convert prediction to integer for mapping
-            predicted_season = season_mapping[int(prediction[0])]
-            st.write("The predicted season for this dress is:", predicted_season)
+        # Get user inputs for style and material
+        style = user_input.get('Style', '').lower()  # Convert to lowercase for consistency
+        material = user_input.get('Material', '').lower()
 
-        elif cloth_type == 'Jacket':
-            preprocessed_input = preprocess_input_jacket(user_input)
-            prediction = model_jacket.predict(preprocessed_input)
-            # Convert prediction to integer for mapping
-            predicted_season = season_mapping[int(prediction[0])]
-            st.write("The predicted season for this jacket is:", predicted_season)
+        # Check if style is "puffer" and material is either "wool" or "leather"
+        if style == 'puffer' and material in ['wool', 'leather']:
+            st.write("The predicted season for this item is: winter
+        else:
+            if cloth_type == 'Dress':
+                preprocessed_input = preprocess_input_dress(user_input)
+                prediction = model_dress.predict(preprocessed_input)
+                # Convert prediction to integer for mapping
+                predicted_season = season_mapping[int(prediction[0])]
+                st.write("The predicted season for this dress is:", predicted_season)
+
+            elif cloth_type == 'Jacket':
+                preprocessed_input = preprocess_input_jacket(user_input)
+                prediction = model_jacket.predict(preprocessed_input)
+                # Convert prediction to integer for mapping
+                predicted_season = season_mapping[int(prediction[0])]
+                st.write("The predicted season for this jacket is:", predicted_season)
