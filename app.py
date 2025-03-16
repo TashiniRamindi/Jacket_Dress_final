@@ -168,13 +168,19 @@ if st.button("Predict"):
     if missing_fields:
         st.write(f"Error: Please fill in all required fields: {', '.join(missing_fields)}")
     else:
-        # Get user inputs for style and material
+        # Get user inputs for style, material, and pattern
         style = user_input.get('Style', '').lower()  # Convert to lowercase for consistency
         material = user_input.get('Material', '').lower()
+        pattern = user_input.get('Pattern', '').lower()
 
         # Check if style is "puffer" and material is either "wool" or "leather"
         if style == 'puffer' and material in ['wool', 'leather']:
-            st.write("The predicted season for this jacket is: winter")
+            st.write("The predicted season for this jacket is: winter (based on style and material).")
+
+        # Check if pattern is "chevron" or "tie_dye" for jackets
+        elif cloth_type == 'Jacket' and pattern in ['chevron', 'tie_dye']:
+            st.write("The predicted season for this jacket is: autumn (based on pattern).")
+
         else:
             if cloth_type == 'Dress':
                 preprocessed_input = preprocess_input_dress(user_input)
