@@ -173,3 +173,4 @@ if st.button("Predict"):
         # Convert prediction to integer for mapping
         predicted_season = season_mapping[int(prediction[0])]  # Ensure prediction is an integer
         st.write("The predicted season for this jacket is:", predicted_season)
+
