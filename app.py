@@ -176,14 +176,14 @@ if st.button("Predict"):
         # Check if style is "puffer" and material is either "wool" or "leather"
         if style == 'puffer' and material in ['wool', 'leather']:
             st.markdown(
-                "<div style='color:green; font-size:24px;'>The predicted season for this jacket is: **winter**</div>",
+                "<div style='background-color:green; color:white; font-size:24px; padding:10px;'>The predicted season for this jacket is: **winter**</div>",
                 unsafe_allow_html=True
             )
 
         # Check if pattern is "chevron" or "tie_dye" for jackets
         elif cloth_type == 'Jacket' and pattern in ['chevron', 'tie_dye']:
             st.markdown(
-                "<div style='color:green; font-size:24px;'>The predicted season for this jacket is: **autumn**</div>",
+                "<div style='background-color:green; color:white; font-size:24px; padding:10px;'>The predicted season for this jacket is: **autumn**</div>",
                 unsafe_allow_html=True
             )
 
@@ -194,7 +194,7 @@ if st.button("Predict"):
                 # Convert prediction to integer for mapping
                 predicted_season = season_mapping[int(prediction[0])]
                 st.markdown(
-                    f"<div style='color:green; font-size:24px;'>The predicted season for this dress is: **{predicted_season}**.</div>",
+                    f"<div style='background-color:green; color:white; font-size:24px; padding:10px;'>The predicted season for this dress is: **{predicted_season}**.</div>",
                     unsafe_allow_html=True
                 )
 
@@ -204,6 +204,7 @@ if st.button("Predict"):
                 # Convert prediction to integer for mapping
                 predicted_season = season_mapping[int(prediction[0])]
                 st.markdown(
-                    f"<div style='color:green; font-size:24px;'>The predicted season for this jacket is: **{predicted_season}**.</div>",
+                    f"<div style='background-color:green; color:white; font-size:24px; padding:10px;'>The predicted season for this jacket is: **{predicted_season}**.</div>",
                     unsafe_allow_html=True
                 )
+
