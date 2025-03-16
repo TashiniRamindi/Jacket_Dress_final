@@ -174,7 +174,7 @@ if st.button("Predict"):
 
         # Check if style is "puffer" and material is either "wool" or "leather"
         if style == 'puffer' and material in ['wool', 'leather']:
-            st.write("The predicted season for this item is: winter
+            st.write("The predicted season for this jacket is: winter")
         else:
             if cloth_type == 'Dress':
                 preprocessed_input = preprocess_input_dress(user_input)
