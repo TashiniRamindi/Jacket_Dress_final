@@ -160,17 +160,24 @@ season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
 
 # When the user presses the 'Predict' button
 if st.button("Predict"):
-    if cloth_type == 'Dress':
-        preprocessed_input = preprocess_input_dress(user_input)
-        prediction = model_dress.predict(preprocessed_input)
-        # Convert prediction to integer for mapping
-        predicted_season = season_mapping[int(prediction[0])]  # Ensure prediction is an integer
-        st.write("The predicted season for this dress is:", predicted_season)
+    # Get user inputs for style and material
+    style = user_input.get('Style', '').lower()  # Convert to lowercase for consistency
+    material = user_input.get('Material', '').lower()
 
-    elif cloth_type == 'Jacket':
-        preprocessed_input = preprocess_input_jacket(user_input)
-        prediction = model_jacket.predict(preprocessed_input)
-        # Convert prediction to integer for mapping
-        predicted_season = season_mapping[int(prediction[0])]  # Ensure prediction is an integer
-        st.write("The predicted season for this jacket is:", predicted_season)
+    # Check if style is "puffer" and material is either "wool" or "leather"
+    if style == 'puffer' and material in ['wool', 'leather']:
+        st.write("The predicted season for this item is: winter (based on style and material).")
+    else:
+        if cloth_type == 'Dress':
+            preprocessed_input = preprocess_input_dress(user_input)
+            prediction = model_dress.predict(preprocessed_input)
+            # Convert prediction to integer for mapping
+            predicted_season = season_mapping[int(prediction[0])]
+            st.write("The predicted season for this dress is:", predicted_season)
 
+        elif cloth_type == 'Jacket':
+            preprocessed_input = preprocess_input_jacket(user_input)
+            prediction = model_jacket.predict(preprocessed_input)
+            # Convert prediction to integer for mapping
+            predicted_season = season_mapping[int(prediction[0])]
+            st.write("The predicted season for this jacket is:", predicted_season)
