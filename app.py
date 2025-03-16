@@ -49,7 +49,7 @@ def preprocess_input_dress(user_input):
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
-    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=False)
+    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=True)
     input_df = pd.concat([input_df, input_dummies], axis=1)
     input_df = input_df.drop(columns=dummy_cols)
     
@@ -81,7 +81,7 @@ def preprocess_input_jacket(user_input):
     dummy_cols = ['Collar', 'Neckline', 'Hemline', 'Style', 'Sleeve Style', 'Pattern', 'Product Colour', 'Material']
     input_df = pd.DataFrame([user_input], columns=user_input.keys())
     
-    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=False)
+    input_dummies = pd.get_dummies(input_df[dummy_cols], drop_first=True)
     input_df = pd.concat([input_df, input_dummies], axis=1)
     input_df = input_df.drop(columns=dummy_cols)
     
@@ -156,21 +156,18 @@ elif cloth_type == 'Jacket':
     }
   
 
-# Mapping for seasons
-season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
-
-# When the user presses the 'Predict' button
 if st.button("Predict"):
     if cloth_type == 'Dress':
         preprocessed_input = preprocess_input_dress(user_input)
         prediction = model_dress.predict(preprocessed_input)
-        # Map the numeric prediction to season name
+        st.write("Raw prediction:", prediction)  # Debugging raw prediction
         predicted_season = season_mapping[prediction[0]]
         st.write("The predicted season for this dress is:", predicted_season)
 
     elif cloth_type == 'Jacket':
         preprocessed_input = preprocess_input_jacket(user_input)
         prediction = model_jacket.predict(preprocessed_input)
-        # Map the numeric prediction to season name
+        st.write("Raw prediction:", prediction)  # Debugging raw prediction
         predicted_season = season_mapping[prediction[0]]
         st.write("The predicted season for this jacket is:", predicted_season)
+
