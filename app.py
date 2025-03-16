@@ -158,20 +158,18 @@ elif cloth_type == 'Jacket':
 # Mapping for seasons
 season_mapping = {0: 'spring', 1: 'summer', 2: 'winter', 3: 'autumn'}
 
-  
-
+# When the user presses the 'Predict' button
 if st.button("Predict"):
     if cloth_type == 'Dress':
         preprocessed_input = preprocess_input_dress(user_input)
         prediction = model_dress.predict(preprocessed_input)
-        st.write("Raw prediction:", prediction)  # Debugging raw prediction
-        predicted_season = season_mapping[prediction[0]]
+        # Convert prediction to integer for mapping
+        predicted_season = season_mapping[int(prediction[0])]  # Ensure prediction is an integer
         st.write("The predicted season for this dress is:", predicted_season)
 
     elif cloth_type == 'Jacket':
         preprocessed_input = preprocess_input_jacket(user_input)
         prediction = model_jacket.predict(preprocessed_input)
-        st.write("Raw prediction:", prediction)  # Debugging raw prediction
-        predicted_season = season_mapping[prediction[0]]
+        # Convert prediction to integer for mapping
+        predicted_season = season_mapping[int(prediction[0])]  # Ensure prediction is an integer
         st.write("The predicted season for this jacket is:", predicted_season)
-
