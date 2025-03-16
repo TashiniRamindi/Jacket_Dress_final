@@ -175,11 +175,11 @@ if st.button("Predict"):
 
         # Check if style is "puffer" and material is either "wool" or "leather"
         if style == 'puffer' and material in ['wool', 'leather']:
-            st.write("The predicted season for this jacket is: winter (based on style and material).")
+            st.write("The predicted season for this jacket is: winter")
 
         # Check if pattern is "chevron" or "tie_dye" for jackets
         elif cloth_type == 'Jacket' and pattern in ['chevron', 'tie_dye']:
-            st.write("The predicted season for this jacket is: autumn (based on pattern).")
+            st.write("The predicted season for this jacket is: autumn")
 
         else:
             if cloth_type == 'Dress':
