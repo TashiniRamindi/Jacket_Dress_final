@@ -175,11 +175,11 @@ if st.button("Predict"):
 
         # Check if style is "puffer" and material is either "wool" or "leather"
         if style == 'puffer' and material in ['wool', 'leather']:
-            st.write("The predicted season for this jacket is: winter")
+            st.markdown("<span style='color:green;'>The predicted season for this jacket is: **winter** </span>", unsafe_allow_html=True)
 
         # Check if pattern is "chevron" or "tie_dye" for jackets
         elif cloth_type == 'Jacket' and pattern in ['chevron', 'tie_dye']:
-            st.write("The predicted season for this jacket is: autumn")
+            st.markdown("<span style='color:green;'>The predicted season for this jacket is: **autumn**.</span>", unsafe_allow_html=True)
 
         else:
             if cloth_type == 'Dress':
@@ -187,11 +187,11 @@ if st.button("Predict"):
                 prediction = model_dress.predict(preprocessed_input)
                 # Convert prediction to integer for mapping
                 predicted_season = season_mapping[int(prediction[0])]
-                st.write("The predicted season for this dress is:", predicted_season)
+                st.markdown(f"<span style='color:green;'>The predicted season for this dress is: **{predicted_season}**.</span>", unsafe_allow_html=True)
 
             elif cloth_type == 'Jacket':
                 preprocessed_input = preprocess_input_jacket(user_input)
                 prediction = model_jacket.predict(preprocessed_input)
                 # Convert prediction to integer for mapping
                 predicted_season = season_mapping[int(prediction[0])]
-                st.write("The predicted season for this jacket is:", predicted_season)
+                st.markdown(f"<span style='color:green;'>The predicted season for this jacket is: **{predicted_season}**.</span>", unsafe_allow_html=True)
